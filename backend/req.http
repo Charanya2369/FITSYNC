@@ -1,0 +1,190 @@
+### user registration(auth)
+POST http://localhost:8000/auth/register
+Content-Type: application/json
+
+{
+  "name": "Test User",
+  "email": "testuser@gmail.com",
+  "password": "test123",
+  "role": "customer"
+}
+
+### user login
+POST http://localhost:8000/auth/login
+Content-Type: application/json
+
+{
+  "email": "testuser@gmail.com",
+  "password": "test123"
+}
+
+### user logout
+POST http://localhost:8000/auth/logout
+
+
+### profile(user)
+GET http://localhost:8000/user/profile
+
+### profile update
+PUT http://localhost:8000/user/update
+Content-Type: application/json
+
+{
+  "height": 165,
+  "weight": 60,
+  "age": 21,
+  "gender": "female"
+}
+
+### link scan
+PUT http://localhost:8000/user/add-scan/693ac198a1345dac47b8a70b
+
+
+### images(scan)
+POST http://localhost:8000/scan/upload
+Content-Type: multipart/form-data
+
+(frontImage file upload)
+(backImage file upload)
+
+### my scans
+GET http://localhost:8000/scan/my-scans
+
+### single scan
+GET http://localhost:8000/scan/693ac198a1345dac47b8a70b
+
+
+### Get size recommendation
+GET http://localhost:8000/size/recommend/693ac198a1345dac47b8a70b/BRAND_ID
+
+### Get Recommendations For a Scan
+GET http://localhost:8000/size/scan/SCAN_ID
+
+
+### Create Brand (Admin Only)
+POST http://localhost:8000/brand/
+Content-Type: application/json
+
+{
+  "brandName": "Zara",
+  "gender": "female",
+  "category": "tshirt"
+}
+
+### Get All Brands
+GET http://localhost:8000/brand/
+
+### Add Size Chart (Admin Only)
+POST http://localhost:8000/brand/size-chart/BRAND_ID
+Content-Type: application/json
+
+{
+  "category": "tshirt",
+  "gender": "female",
+  "sizes": [
+    { "size": "S", "chest": 80, "waist": 65, "hip": 90 },
+    { "size": "M", "chest": 85, "waist": 70, "hip": 95 }
+  ]
+}
+
+### Get Size Charts of Brand
+GET http://localhost:8000/brand/size-chart/BRAND_ID
+
+
+##########################################
+# FITNESS APIS
+##########################################
+
+### Analyze Fitness (BMI + Plans)
+POST http://localhost:8000/fitness/analyze
+Content-Type: application/json
+
+{
+  "height": 165,
+  "weight": 60,
+  "goal": "maintain"
+}
+
+### Fitness History
+GET http://localhost:8000/fitness/history
+
+### Get Latest Fitness Report
+GET http://localhost:8000/fitness/latest
+
+
+##########################################
+# RETAILER APIS
+##########################################
+
+### Create/Update Retailer Profile
+POST http://localhost:8000/retailer/profile
+Content-Type: application/json
+
+{
+  "businessName": "FitSync Retailer"
+}
+
+### Add Product
+POST http://localhost:8000/retailer/add-product
+Content-Type: application/json
+
+{
+  "productName": "Slim Fit Jeans",
+  "category": "jeans",
+  "price": 1999,
+  "sizeOptions": ["S", "M", "L"]
+}
+
+### Get Catalog
+GET http://localhost:8000/retailer/catalog
+
+### Retailer Analytics
+GET http://localhost:8000/retailer/analytics
+
+### Report Return
+POST http://localhost:8000/retailer/return
+Content-Type: application/json
+
+{
+  "mismatch": true
+}
+
+
+##########################################
+# MANUFACTURER APIS
+##########################################
+
+### Create/Update Manufacturer Profile
+POST http://localhost:8000/manufacturer/profile
+Content-Type: application/json
+
+{
+  "companyName": "EcoTextiles"
+}
+
+### Submit Recycling Request
+POST http://localhost:8000/manufacturer/recycle-request
+Content-Type: application/json
+
+{
+  "quantityKg": 5
+}
+
+### Update Recycling Status
+PUT http://localhost:8000/manufacturer/update-status/REQUEST_ID
+Content-Type: application/json
+
+{
+  "status": "processed"
+}
+
+### Update Total Recycled
+POST http://localhost:8000/manufacturer/update-total
+Content-Type: application/json
+
+{
+  "kg": 10
+}
+
+### Manufacturer Dashboard
+GET http://localhost:8000/manufacturer/dashboard
